@@ -1,0 +1,36 @@
+{% extends './base.html' %} {% load static %} {% block title %}| order 
+{% endblock title %} {% block content %}
+<div class="container">
+  <div class="order-form-container">
+    <div class="order-title">
+      <h2>Place Order</h2>
+    </div>
+    <form action="{% url 'order' product.product_id %}" method="POST">
+      {% csrf_token %}
+      <div class="form-group">
+        <img
+          src="{{ product.product_image_front.url }}"
+          class="img-thumbnail order-image"
+          alt="{{ product.name }}"
+        />
+      </div>
+      <div class="form-group">
+        <h3 class="order-form-title">
+          <span class="order-form-heading">Product Name:</span>
+          {{product.product_name}}
+        </h3>
+      </div>
+      <fieldset>
+        {{form.as_p}}
+        <div class="form-group">
+          <input
+            class="btn btn-category mt-auto align-self-start"
+            type="submit"
+            value="Place Order"
+          />
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</div>
+{% endblock %}

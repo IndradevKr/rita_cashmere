@@ -1,0 +1,73 @@
+{% extends './base.html' %} {% load static %} 
+{% block title %}| contact {%endblock title %}
+{% block content %}
+<div class="container-fluid">
+  <div class="contact-container">
+
+    <section>
+      <div class="section-title-container pt-3">
+        <div class="section-title">
+          <h2>CONTACT US</h2>
+        </div>
+      </div>
+    
+      <form method="post" action="{% url 'contact' %}">
+        {% csrf_token %}
+        <section class="contact" id="contact">
+            <div class="contact-section">
+            <div class="contact-form-container">
+              <div class="contact-form">
+                <form action="{% url 'contact' %}" method="POST">
+                  {% csrf_token %}
+                  <fieldset>
+                    {{form.as_p}}
+                    <input type="submit" value="Submit" id="submit-btn" class="submit-btn">
+                  </fieldset>
+                </form>
+              </div>
+            </div>
+          </div>
+          </section>
+      </form>
+    </section>
+
+    <section>
+      <div class="section-title-container pt-5">
+        <div class="section-title">
+          <h2>OUR CONTACT INFO</h2>
+        </div>
+      </div>
+
+      <div class="row pt-4 pb-4 px-4">
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header">
+              <div class="embed-responsive">
+                <iframe class="embed-responsive-item" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d9287.235512593508!2d85.29753949187179!3d27.718929191619843!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb1966e50f8bf9%3A0x576f82a5bdceeba9!2sRita%20Cashmere!5e0!3m2!1sen!2snp!4v1674293475500!5m2!1sen!2snp" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 px-2">
+            <div class="contact-info-container">
+              <div class="company-name-container">
+                <div class="company-logo">
+                  <img src={% static 'assets/images/rita-logo.png' %} alt="Rita Cashmere">
+                </div>
+              <h3 class="company-title">Rita Cashmere Industries Pvt. Ltd.</h3>
+              </div>
+              <div class="company-contact-details">
+              <p class="contact-info"><i class="fa fa-light fa-location-dot"></i><span class="info-title">Address:</span><span class="info-desc">{{company.company_address}}</span></p>
+              <p class="contact-info"><i class="fa fa-phone"></i><span class="info-title">Phone:</span><span class="info-desc">{{company.company_phone}}</span></p>
+              <p class="contact-info"><i class="fa fa-light fa-envelope"></i><span class="info-title">Email:</span><span class="info-desc">{{company.company_email}}</span></p>
+              <p class="contact-info"><i class="fa fa-phone"></i><span class="info-title">Alternative phone:</span><span class="info-desc">{{company.company_optional_phone}}</span></p>
+              </div>
+            </div>
+        </div>  
+      </div>
+    </section>
+
+  </div>
+</div>
+{% endblock content %} 
+

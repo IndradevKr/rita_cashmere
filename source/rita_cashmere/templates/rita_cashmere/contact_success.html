@@ -1,0 +1,14 @@
+{% extends './base.html' %} 
+{% load static %} 
+{% block content %}
+<div class="container-fluid pt-5 pb-5 px-2">
+    <div class="success-container">
+        <h3 class="success-response">Thank you!!</h3>
+        <h4 class="success-response">We will be contacting you soon with the update.</h4>
+        <div class="page-link-container">
+            <a href="{% url 'index' %}" class="link-navigation">Go to Home Page</a> <br/>
+            <a href="{% url 'collections' %}" class="link-navigation">View our Products</a>
+        </div>
+    </div>
+</div>
+{% endblock content %}

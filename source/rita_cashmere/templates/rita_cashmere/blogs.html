@@ -1,0 +1,40 @@
+{% extends './base.html' %} {% load static %} 
+{% block title %}| blogs {%endblock title %}
+{% block content %}
+  <div class="container-fluid pt-2 pb-2 px-4">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="blog-title-container">
+        <h3 class="blog-title">{{latest_blog.blog_title}}</h3>
+        </div>
+        <div class="uploaded-date">
+          <small class="blog-uploaded">{{latest_blog.blog_uploaded_date|date:"M d, Y"}}</small>
+        </div>
+        <div class="blog-image-container">
+          <img src={{latest_blog.blog_image.url}} alt="{{latest_blog.blog_image_alt}}" class="img-fluid" />
+        </div>
+        <div class="blog-content">
+          {{latest_blog.blog_content|safe}}
+        </div>
+      </div>
+    {% if blogs %}  
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="blog-header">
+              More Blogs
+            </h3>
+          </div>
+          <ul class="list-group list-group-flush">
+            
+            {% for item in blogs %}
+             <li class="list-desc-item pt-1 pb-1 px-1"><a href="{% url 'blog_details' item.slug %}">{{item.blog_title}}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    {% endif %}
+    </div>
+  </div>
+  </div>
+{% endblock content %}

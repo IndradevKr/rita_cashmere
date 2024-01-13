@@ -1,0 +1,109 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% block meta %}
+
+    {% endblock %}
+    <title>Rita Cashmere {% block title %}{% endblock title %}</title>
+    <!-- CSS only -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href={% static 'assets/styles.css' %}/>
+    <link rel="stylesheet" type="text/css" href={% static 'assets/contact-style.css' %}/>
+    <link rel="stylesheet" type="text/css" href={% static 'assets/owl.carousel.min.css' %}/>
+    <link rel="stylesheet" type="text/css" href={% static 'assets/owl.theme.default.min.css' %}/>
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;500;600;700&family=Poppins:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <script src=" {% static 'js/jQuery.js' %} "></script>
+    <script src=" {% static 'js/bootstrap.min.js' %} "></script>
+    <script src=" {% static 'assets/owl.carousel.min.js' %}"></script>
+  </head>
+  <body>
+    <nav class="nav">
+      <div class="logo">
+          <img src={% static 'assets/images/rita-logo.png' %} alt="Rita Cashmere">
+      </div>
+      <div class="hamburger">
+          <div class="line1"></div>
+          <div class="line2"></div>
+          <div class="line3"></div>
+      </div>
+      <ul class="nav-links" id="nav-menu">
+          <li><a href="{% url 'index' %}"  {% if "/home" in request.path %}class="active"{% endif %} >Home</a></li>
+          <li><a href="{% url 'collections' %}" {% if "/collections" in request.path %}class="active"{% endif %}>Collections</a></li>
+          <li><a href="{% url 'blogs' %}" {% if "/blogs" in request.path %}class="active"{% endif %}>Blogs</a></li>
+          <li><a href="{% url 'about' %}" {% if "/about" in request.path %}class="active"{% endif %}>About</a></li>
+          <li><a href="{% url 'contact' %}" {% if "/contact" in request.path %}class="active"{% endif %}>Contact Us</a></li>
+      </ul>
+  </nav>
+  <main>
+    {% block content %}
+    
+    {% endblock %}
+  </main>
+  <div class="scroll-up-container">
+  <i class="scroll-up" id="scroll-up">
+    <img src="{% static 'assets/images/up-arrow.svg' %}" class="social-icon up-arrow" alt="scroll-up">
+  </i>
+  </div>
+  <footer>
+    <div class="mt-5 pt-5 pb-1 footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-5 col-xs-12 about-company">
+            <div class="d-flex w-100">
+              <div class="text-left">
+                <div class="footer-logo">
+                  <img src={% static 'assets/images/rita-logo.png' %} alt="Rita Cashmere">
+                </div>
+              </div>
+              <div class="text-right ml-auto">
+                <h5 class="footer-title">Rita Cashmere Industries Pvt. Ltd. (Nepal)</h5>
+              </div>
+            </div>
+            <p class="pr-5 footer-text">
+              We are a leading manufacturer of premium cashmere products, crafting luxury garments with unmatched quality and craftsmanship. <br /> 
+              Our commitment is to provide the ultimate luxury experience to our customers while promoting sustainable and ethical practices.
+            </p>
+            <p><a href="#"><i class="fa fa-brands fa-facebook"></i></a>
+              <a href="#"><i class="fa fa-brands fa-instagram"></i></a>
+              <a href="#"><i class="fa fa-brands fa-linkedin"></i></a>
+            </p>
+          </div>
+          <div class="col-lg-2 col-xs-12 links">
+            <h4 class="mt-lg-0 mt-sm-3 footer-title">Links</h4>
+              <ul class="m-0 p-0">
+                <li><a href="{% url 'index' %}"  {% if "/home" in request.path %}class="active"{% endif %} >Home</a></li>
+                <li><a href="{% url 'collections' %}" {% if "/collections" in request.path %}class="active"{% endif %}>Collections</a></li>
+                <li><a href="#" {% if "/products" in request.path %}class="active"{% endif %}>Products</a></li>
+                <li><a href="#" {% if "/services" in request.path %}class="active"{% endif %}>Services</a></li>
+                <li><a href="{% url 'contact' %}" {% if "/contact" in request.path %}class="active"{% endif %}>Contact Us</a></li>
+              </ul>
+          </div>
+          <div class="col-lg-5 col-xs-12 location">
+            <h4 class="mt-lg-0 mt-sm-4 footer-title">Location</h4>
+            <p><i class="fa fa-light fa-location-dot"></i><span class="footer-text font-weight-bold">Khushibun-17, Kathmandu (Nepal) </span></p>
+            <p class="mb-0"><span class="mr-4"><i class="fa fa-phone"></i></span><span class="mr-2 footer-text">(541) 754-3010</span></p>
+            <p><span class="mr-4"><i class="fa fa-light fa-envelope"></i></span><span class="mx-auto footer-text">info@hsdf.com</span></p>
+          </div>
+        </div>
+        <div class="row mt-5">
+          <div class="col copyright">
+            <p class=""><small class="footer-text">© {% now "Y" %}. All Rights Reserved.</small></p>
+          </div>
+        </div>
+      </div>
+      </div>
+  </footer>
+    <script>
+    {% block script %}{% endblock script %}
+    </script>
+    <script type="text/javascript" src={% static 'assets/nav.js' %}></script>
+    <script type="text/javascript" src={% static 'assets/carousel.js' %}></script>
+    <script type="text/javascript" src={% static 'assets/owl-carousel-responsive.js' %}></script>
+    <script type="text/javascript" src={% static 'assets/scroll-top.js' %}></script>
+  </body>
+</html>

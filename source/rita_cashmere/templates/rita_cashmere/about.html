@@ -1,0 +1,45 @@
+{% extends './base.html' %} {% load static %} 
+{% block title %}| about
+{%endblock title %} 
+{% block content %}
+<div class="container pt-2 bt-2">
+    <section class="row">
+        <div class="col-md-4 order-md-1 about-img-container">
+            <img src={{about.about_image_one.url}} alt={{about.about_image_one_alt}} class="img-fluid" />
+        </div>
+        <div class="col-md-8 order-md-2">
+            <h2 class="about-title">Our Company</h2>
+            <p class="about-description">
+                {{about.about_text_one |safe}}
+            </p>
+        </div>
+    </section>
+    {% if about.about_text_two %}
+        <section class="row">
+        <div class="col-md-4 order-md-2">
+            <img src={{about.about_image_two.url}} alt={{about.about_text_two_alt}} class="img-fluid" />
+        </div>
+        <div class="col-md-8 order-md-1">
+            <p class="about-description">
+              {{about.about_text_two |safe}}  
+            </p>
+        </div>
+    </section>
+    {% endif %}
+
+        {% if about.about_text_three %}
+        <section class="row">
+        <div class="col-md-4 order-md-2">
+            <img src={{about.about_image_two.url}} alt={{about.about_text_three_alt}} class="img-fluid" />
+        </div>
+        <div class="col-md-8 order-md-1">
+            <p class="about-description">
+              {{about.about_text_three | safe
+            }}  
+            </p>
+        </div>
+    </section>
+    {% endif %}
+
+</div>
+{% endblock content %}

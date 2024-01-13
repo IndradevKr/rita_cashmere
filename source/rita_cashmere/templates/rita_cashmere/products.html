@@ -1,0 +1,108 @@
+{% extends './base.html' %} {% load static %} {% block title %}| products
+{% endblock title %} 
+{% block content %}
+<div class="container-fluid pt-2 mt-2">
+  <div class="row px-2">
+    <div class="d-flex justify-content-between">
+    <ul class="breadcrumb px-2">
+      <li><a href="{% url 'index' %}" class="ms-2 font-weight-bold" > <i class="fa-solid fa-angle-left"></i> Home</a></li>
+      <li><a href="{% url 'collections' %}" class="ms-2 font-weight-bold"><i class="fa-solid fa-angle-left"></i>Collections</a></li>
+    </ul>
+    </div>
+  </div>
+  <div class="section-title-container pt-2">
+    <div class="section-title">
+      <h2>OUR PRODUCTS</h2>
+    </div>
+  </div>
+  <div class="row pt-2">
+    {% for product in products %}
+    <div class="col-md-3">
+      <div class="card h-100 mb-2 mx-2">
+        <img
+          class="card-img-top category-card-image img-fluid rounded mx-auto d-block"
+          src="{{ product.product_image_front.url }}"
+          alt="{{ product.name }}"
+        />
+        <div class="card-body">
+          <h5 class="card-title">{{ product.product_name }}</h5>
+          <p class="card-text">{{ product.product_description }}</p>
+
+          <div class="d-flex justify-content-between w-100 pb-3"> 
+            <div class="text-left mr-auto">
+              <span class="product-heading">Category: </span>{{ product.category.category_name}}
+            </div>
+            <div class="text-right ml-auto px-2">
+              <span class="product-heading">Price: </span> <strong>${{product.product_price_dollar}}</strong>
+            </div>
+          </div>  
+
+          <ul class="list-group list-group-flush">
+            <li class="list-desc-item">
+              <span class="product-heading">Product Fabric: </span>{{ product.product_fabric }}
+            </li>
+            {% if product.product_available_sizes %}
+            <li class="list-desc-item">
+              <span class="product-heading">Available Sizes: </span>{{product.product_available_sizes}}
+            </li>
+            {% endif %} {% if product.product_code %}
+            <li class="list-desc-item">
+              <span class="product-heading">Product Code: </span>{{product.product_code}}
+            </li>
+            {% endif %} {% if product.product_weight %}
+            <li class="list-desc-item">
+              <span class="product-heading">Product Weight: </span>{{product.product_weight}}
+            </li>
+            {% endif %} 
+            {% if product.product_price_eur %}
+            <li class="list-desc-item">
+              <span class="product-heading">Price In EUR: </span>{{product.product_price_eur}}
+            </li>
+            {% endif %}
+            {% if product.product_blog_url %}
+            <li class="list-desc-item">
+            <a href="{{product.product_blog_url}}" class="blog-link">More Details</a>
+            </li>
+            {% endif %} 
+          </ul>
+          <div class="card-body">
+            <a href="{% url 'order' product.product_id %}" class="btn btn-category mt-auto align-self-start"
+              >Place Order</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+    <div class="pagination-container">
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          {% if products.has_previous %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{ products.previous_page_number }}" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+              </a>
+            </li>
+          {% endif %}
+          {% for page_num in products.paginator.page_range %}
+            <li class="page-item {% if page_num == products.number %}active{% endif %}">
+              <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a>
+            </li>
+          {% endfor %}
+          {% if products.has_next %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{ products.next_page_number }}" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Next</span>
+              </a>
+            </li>
+          {% endif %}
+        </ul>
+      </nav>
+    </div>
+</div>
+
+{% endblock content %}

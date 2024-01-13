@@ -1,0 +1,75 @@
+{% extends './base.html' %} {% load static %} {% block title %}| collections
+{%endblock title %} {% block content %}
+<div class="container-fluid pt-4">
+  <div class="row px-2">
+  <div class="d-flex justify-content-between">
+    <ul class="breadcrumb px-2">
+      <li><a href="{% url 'index' %}" class="ms-2 font-weight-bold" > <i class="fa-solid fa-angle-left"></i> Home</a></li>
+      <li><a href="{% url 'collections' %}" class="ms-2 font-weight-bold"><i class="fa-solid fa-angle-left"></i>Collections</a></li>
+    </ul>
+    <div class="search-container">
+    <form method="GET" action="{% url 'collections' %}">
+      <input type="search" class="search-text-box" name="q" placeholder="Search by category name">
+      <input type="submit" value="Search" class="search-button">
+    </form>
+    </div>
+    </div>
+  </div>
+  <div class="section-title-container">
+    <div class="section-title">
+      <h2>OUR COLLECTIONS</h2>
+    </div>
+  </div>
+  <div class="row">
+    {% for item in categories %}
+    <div class="col-md-3">
+      <div class="card h-100 mx-2">
+        <img
+          src="{{item.image.url}}"
+          class="card-img-top category-card-image img-fluid rounded mx-auto d-block"
+          alt="{{item.meta_keywords}}"
+        />
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title">{{item.category_name}}</h5>
+          <p class="card-text mb-3">{{item.meta_descriptions |truncatewords:9}}</p>
+          <a href="{% url 'collectionsView' item.slug %}" class="btn btn-category mt-auto align-self-start"
+            >View Products</a
+          >
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  
+    <div class="pagination-container">
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          {% if categories.has_previous %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{ categories.previous_page_number }}" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+              </a>
+            </li>
+          {% endif %}
+          {% for page_num in categories.paginator.page_range %}
+            <li class="page-item {% if page_num == categories.number %}active{% endif %}">
+              <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a>
+            </li>
+          {% endfor %}
+          {% if categories.has_next %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{ categories.next_page_number }}" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Next</span>
+              </a>
+            </li>
+          {% endif %}
+        </ul>
+      </nav>
+    </div>
+
+</div>
+
+
+{% endblock content %}
